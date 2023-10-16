@@ -11,6 +11,7 @@ public class BulletBase : MonoBehaviour
     public MeshRenderer myMeshRenderer = null;
     [Header("Dynamic Values")]
     public Vector3 MoveDirection = Vector3.zero;
+    private float lifeTime = 0.0f;
     public void Initialize(Bullet aBulletContainer)
     {
         BulletData.Copy(aBulletContainer);
@@ -21,6 +22,11 @@ public class BulletBase : MonoBehaviour
     void Update()
     {
         transform.Translate(MoveDirection * Time.deltaTime * BulletData.SpeedFactor);
+        lifeTime += Time.deltaTime;
+        if (lifeTime >= 100.0f)
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

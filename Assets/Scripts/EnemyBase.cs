@@ -43,7 +43,7 @@ public class EnemyBase : MonoBehaviour
         //}
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         GameManager.GlobalGameManager.AllEnemies.Remove(this);
     }

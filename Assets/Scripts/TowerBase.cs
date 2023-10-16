@@ -8,8 +8,12 @@ public class TowerBase : MonoBehaviour
     public List<GunBaseObject> Guns = new List<GunBaseObject>();
     [Header("Dynamic Values")]
     public int CurrentGun = 0;
+    public int CurrentBullet = 0;
+    public float BulletDelayTimer = 0.0f;
+    public int CurrentWave = 0;
+    public float WaveTimer = 0.0f;
     //public Vector3 FirePositionOffset = Vector3.zero;
-
+    public EnemyBase LockedOnTargetEnemy = null;
     void Start()
     {
         foreach (GunBaseObject gun in Guns)
@@ -26,7 +30,7 @@ public class TowerBase : MonoBehaviour
         foreach(EnemyBase enemy in GameManager.GlobalGameManager.AllEnemies)
         {
             var distanceVector = enemy.transform.position - transform.position;
-            if(distanceVector.magnitude > shortestDist)
+            if(distanceVector.magnitude < shortestDist)
             {
                 lookAtEnemy = enemy;
                 shortestDist = distanceVector.magnitude;
@@ -34,7 +38,7 @@ public class TowerBase : MonoBehaviour
                 {
                     if (gun.LockOnRange >= shortestDist)
                     {
-                        gun.LockedOnTargetEnemy = enemy;
+                        LockedOnTargetEnemy = enemy;
                         returnValue = true;
                     }
                 }
@@ -50,18 +54,19 @@ public class TowerBase : MonoBehaviour
     {
         if(TryCalculateEnemyInRange())
         {
+            WaveTimer += Time.deltaTime;
             foreach (GunBaseObject gun in Guns)
             {
-                gun.WaveTimer += Time.deltaTime;
-                if (gun.WaveTimer >= gun.WavesPerCycle[gun.CurrentWave].FireDelay)
+          
+                if (WaveTimer >= gun.WavesPerCycle[CurrentWave].FireDelay)
                 {
                     StartCoroutine(FireWave(gun));
-                    gun.CurrentWave++;
-                    if(gun.CurrentWave >= gun.WavesPerCycle.Count)
+                    CurrentWave++;
+                    if(CurrentWave >= gun.WavesPerCycle.Count)
                     {
-                        gun.CurrentWave = 0;
+                        CurrentWave = 0;
                     }
-                    gun.WaveTimer -= gun.WavesPerCycle[gun.CurrentWave].FireDelay;
+                    WaveTimer -= gun.WavesPerCycle[CurrentWave].FireDelay;
                 }
             }
         }
@@ -72,22 +77,25 @@ public class TowerBase : MonoBehaviour
     }
     private IEnumerator FireWave(GunBaseObject gun)
     {
-        var currentWave = gun.WavesPerCycle[gun.CurrentWave];
-        while (currentWave.Bullets.Count > currentWave.CurrentBullet)
+        var currentWave = gun.WavesPerCycle[CurrentWave];
+        while (currentWave.Bullets.Count > CurrentBullet)
         {
-            var currentBullet = currentWave.Bullets[currentWave.CurrentBullet];
-            currentWave.BulletDelayTimer += Time.deltaTime;
+            var currentBullet = currentWave.Bullets[CurrentBullet];
+           BulletDelayTimer += Time.deltaTime;
 
-            if (currentWave.BulletDelayTimer >= currentBullet.FireDelay)
+            if (BulletDelayTimer >= currentBullet.FireDelay)
             {
                 var bulletSpawn = GameManager.GlobalGameManager.SpawnObject(currentBullet.ModelKey, transform.position);
                 var bulletComponent = bulletSpawn.GetComponent<BulletBase>();
                 bulletComponent.Initialize(currentBullet);
-                bulletComponent.MoveDirection = (gun.LockedOnTargetEnemy.transform.position - transform.position).normalized;
-                currentWave.BulletDelayTimer -= currentBullet.FireDelay;
-                currentWave.CurrentBullet++;
+                bulletComponent.MoveDirection = (LockedOnTargetEnemy.transform.position - transform.position).normalized;
+                BulletDelayTimer -= currentBullet.FireDelay;
+                CurrentBullet++;
             }
             yield return null;
         }
+        CurrentBullet = 0;
+        yield return null;
+
     }
 }

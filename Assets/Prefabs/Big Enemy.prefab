@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 3644953591774124894}
   - component: {fileID: 3699783050826291522}
   - component: {fileID: 2422741794814135565}
+  - component: {fileID: 4539985223128810706}
   m_Layer: 0
   m_Name: Big Enemy
   m_TagString: Untagged
@@ -356,8 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyData:
-    ModelKey: 
-    StartingPositionOffset: {x: 0, y: 0, z: 0}
     SpawnDelay: 0
     MaxHealth: 1
     Damage: 1
@@ -365,3 +364,30 @@ MonoBehaviour:
     Health: 0
     MovementDirection: {x: 0, y: 0, z: 0}
   EnemyHealth: {fileID: 2921149102124915584}
+--- !u!54 &4539985223128810706
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7361977620993004290}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1

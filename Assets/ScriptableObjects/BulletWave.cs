@@ -15,9 +15,7 @@ public class BulletWave : ScriptableObject
 
     [Header("Waves")]
     public List<Bullet> Bullets = new List<Bullet>();
-    [Header("Dynamic Values")]
-    public int CurrentBullet = 0;
-    public float BulletDelayTimer = 0.0f;
+ 
 
     public void Reset()
     {
