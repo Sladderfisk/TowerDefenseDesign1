@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bullet
 {
     [Header("Base & Apperance")]
-    public string SpawnKey = "";
+    public GameObject SpawnKey = null;
     public Color ColorFactor = Color.white;
     [Header("How Fast is the bullet?")]
     public float SpeedFactor = 1.0f;
