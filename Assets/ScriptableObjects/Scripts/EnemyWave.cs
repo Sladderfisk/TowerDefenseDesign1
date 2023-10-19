@@ -41,6 +41,11 @@ public class EnemyWave : MonoBehaviour
     public Vector3 MovementDirection = Vector3.zero;
     public void Start()
     {
+        var enemyComp = GetComponentsInChildren<EnemyBase>();
+        foreach(EnemyBase enemyFound in enemyComp)
+        {
+            Enemies.Add(enemyFound);
+        }
         foreach (EnemyBase enemy in Enemies)
         {
             enemy.Initialize(MovementDirection);
