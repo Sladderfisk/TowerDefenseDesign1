@@ -122,9 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyData:
     SpawnDelay: 0
-    MaxHealth: 1
-    Damage: 1
-    MoveSpeed: 1
+    MaxHealth: 3
+    Damage: 2
+    MoveSpeed: 4
     Health: 0
     MovementDirection: {x: 0, y: 0, z: 0}
   EnemyHealth: {fileID: 4929589745625190100}

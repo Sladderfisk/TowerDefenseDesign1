@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -12,6 +13,7 @@ public class Enemy
     [Header("Enemy Stats")]
     public int MaxHealth = 1;
     public int Damage = 1;
+    public int MoneyOnKill = 0;
     public float MoveSpeed = 1.0f;
 
     [Header("Dynamic Values")]
@@ -22,6 +24,9 @@ public class Enemy
     {
         MaxHealth = aEnemyToCopy.MaxHealth;
         MoveSpeed = aEnemyToCopy.MoveSpeed;
+        SpawnDelay = aEnemyToCopy.SpawnDelay;
+        MoneyOnKill = aEnemyToCopy.MoneyOnKill;
+        Damage = aEnemyToCopy.Damage;
     }
     public void Reset()
     {
