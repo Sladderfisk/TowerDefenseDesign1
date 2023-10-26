@@ -65,7 +65,7 @@ public class FallingButtonsHandler : MonoBehaviour
 		{
 			GameObject button = Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity, canvas.transform);
 
-			Vector3 spawnPosition = Camera.main.ViewportToScreenPoint(new Vector2(Random.Range(minX, maxX), 3)) - new Vector3(Screen.width, Screen.height, 0) / 2;
+			Vector3 spawnPosition = Camera.main.ViewportToScreenPoint(new Vector2(Random.Range(minX, maxX), 1.1f)) - new Vector3(Screen.width, Screen.height, 0) / 2;
 
 			//Vector2 referenceResolution = canvas.GetComponent<CanvasScaler>().referenceResolution;
 			/*spawnPosition.x *= (referenceResolution.x / 2) / Camera.main.orthographicSize;
