@@ -1,5 +1,10 @@
 # This .gitignore file should be placed at the root of your Unity project directory
 #
+# Våra egna ignores:
+
+/Assets/Scenes/[Tt]est.unity
+/Assets/Scenes/[Tt]est.unity.meta
+
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 /[Ll]ibrary/
